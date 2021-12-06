@@ -13,12 +13,12 @@ export default async function handler(req, res) {
 
 	const { url } = req.query;
 
-	const baseUrl = decodeURIComponent(url);
+	const baseUrl = encodeURI(decodeURIComponent(url));
 
 	console.log({ baseUrl });
 
 	try {
-		const { data } = await axios.get(url);
+		const { data } = await axios.get(baseUrl);
 		res.send(data);
 	} catch (e) {
 		console.log({ e });
